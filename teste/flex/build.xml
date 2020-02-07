@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Builder" basedir="." default="build">
+
+    <!-- Propriedades -->
+    <property environment="env"/>
+    <property file="build.properties"/>
+
+    <!-- Flex Ant Tasks -->
+    <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
+    <property name="ADT" value="${FLEX_HOME}/lib/adt.jar"/>
+
+    <!-- Target principal reponsável por chamar todos os outros -->
+    <target name="build"
+            depends="compile-application, copy-rsls, create-air-package"/>
+
+    <!-- Copia os RSLs (Bibliotecas do framework) -->
+    <target name="copy-rsls">
+        <copy todir="${dist.dir}" overwrite="true">
+            <fileset dir="${FLEX_HOME}/frameworks/rsls"/>
+        </copy>
+    </target>
+
+    <!-- Compila a aplicação -->
+    <target name="compile-application">
+        <replace value="${project.version}" file="${flex.source}/Main.mxml" token="[VERSION]"/>
+        <replace value="${build.number}" file="${flex.source}/Main.mxml" token="[BUILD]"/>
+
+        <mxmlc file="${flex.source}/Main.mxml"
+               output="${dist.dir}/Main.swf"
+               keep-generated-actionscript="false"
+               target-player="${player.version}"
+               optimize="true"
+               debug="false"
+               locale="pt_BR"
+               actionscript-file-encoding="UTF-8">
+
+            <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+            <load-config filename="${FLEX_HOME}/frameworks/air-config.xml"/>
+            <source-path path-element="${FLEX_HOME}/frameworks"/>
+
+            <compiler.library-path dir="." append="true">
+                <include name="${library.dir}"/>
+            </compiler.library-path>
+
+            <keep-as3-metadata name="SearchField"/>
+            <keep-as3-metadata name="Searchable"/>
+            <keep-as3-metadata name="Code"/>
+            <keep-as3-metadata name="Description"/>
+            <keep-as3-metadata name="GridColumn"/>
+        </mxmlc>
+        <replace value="[VERSION]" file="${flex.source}/Main.mxml" token="${project.version}"/>
+        <replace value="[BUILD]" file="${flex.source}/Main.mxml" token="${build.number}"/>
+    </target>
+
+    <!-- Enpacota no formato AIR -->
+    <target name="create-air-package">
+        <copy todir="${target.dir}" overwrite="true">
+            <fileset dir="${flex.source}">
+                <include name="${app.descriptor.name}"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${target.dir}" overwrite="true">
+            <fileset dir="${dist.dir}">
+                <include name="*.swf"/>
+            </fileset>
+        </copy>
+
+        <replace value="${project.version}" file="${target.dir}/${app.descriptor.name}" token="0.0.0"/>
+        <replace value="${project.version}-${build.number}" file="${target.dir}/${app.descriptor.name}"
+                 token="999.999.999"/>
+
+    <copy todir="${dist.dir}" overwrite="true">
+        <fileset dir="${target.dir}">
+            <include name="teste.exe"/>
+        </fileset>
+    </copy>
+</target>
+
+</project>
+

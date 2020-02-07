@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<spicefactory:Objects xmlns:fx="http://ns.adobe.com/mxml/2009"
+                      xmlns:spicefactory="http://www.spicefactory.org/parsley">
+    <!---
+         Contexto Geral da Aplicação
+         @author Diego Ramalho de Oliveira
+         @since 10/09/2014
+         @version 1.0.0
+    -->
+    <fx:Script>
+        import br.com.projetusti.teste.controller.HelloController;
+        import br.com.projetusti.teste.controller.MenuController;
+        import br.com.projetusti.teste.controller.HelloController;
+        import br.com.projetusti.teste.managers.EndpointManager;
+        import br.com.projetusti.teste.managers.WindowManager;
+        import br.com.projetusti.teste.model.presentation.ApplicationPM;
+        import br.com.projetusti.teste.service.Service;
+        import br.com.projetusti.teste.view.menu.Menu;
+    </fx:Script>
+    <fx:Declarations>
+        <!-- Managers -->
+        <spicefactory:Object type="{EndpointManager}" order="0"/>
+        <spicefactory:Object type="{WindowManager}" order="0"/>
+        <!-- Service -->
+        <spicefactory:Object id="helloService" type="{Service}">
+            <spicefactory:Property name="destination" value="HelloService"/>
+        </spicefactory:Object>
+        <!-- Controllers -->
+        <spicefactory:Object type="{MenuController}"/>
+        <spicefactory:Object type="{HelloController}"/>
+        <!-- Presentations -->
+        <spicefactory:Object type="{ApplicationPM}"/>
+        <!-- Menus -->
+        <spicefactory:Object type="{Menu}"/>
+    </fx:Declarations>
+</spicefactory:Objects>

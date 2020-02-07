@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fx:Object xmlns:fx="http://ns.adobe.com/mxml/2009">
+    <!--
+        Menu do sistema.
+        @author Diego Ramalho de Oliveira
+        @since 10/09/2014
+        @version 1.0.0
+    -->
+    <fx:Script>
+         <![CDATA[
+        import br.com.projetusti.teste.view.HelloView;
+        import br.com.projetusti.teste.view.HelloView;
+        ]]>
+    </fx:Script>
+    <!-- Menu principal -->
+    <fx:Declarations>
+        <fx:XML id="mainMenu" format="e4x">
+            <root>
+                <!-- Mensagem -->
+                <menuitem id="miMensagem" label="Telas">
+                    <menuitem id="miManContNovoAtendimento"
+                              label="Mensagem"
+                              viewClass="{getQualifiedClassName(HelloView)}"
+                              useWindowManager="True"
+                    />
+                    <!--<menuitem id="miManContAtendimento"
+                              label="Sua tela"
+                              viewClass=""
+                              useWindowManager="True"
+                    />-->
+                </menuitem>
+            </root>
+        </fx:XML>
+    </fx:Declarations>
+</fx:Object>

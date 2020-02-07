@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spicefactory:Objects xmlns:fx="http://ns.adobe.com/mxml/2009"
+                      xmlns:spicefactory="http://www.spicefactory.org/parsley">
+    <!---
+        Contexto da Message.
+        @author Diego Ramalho de Oliveira
+        @since 10/09/2014
+        @version 1.0.0
+    -->
+    <fx:Script>
+		<![CDATA[
+        import br.com.projetusti.teste.model.presentation.HelloPM;
+        import br.com.projetusti.teste.model.presentation.HelloPM;
+        import br.com.projetusti.teste.model.vo.Message;
+        ]]>
+	</fx:Script>
+    <fx:Declarations>
+        <!-- Model -->
+        <spicefactory:Object id="messagePM" type="{HelloPM}"/>
+        <!-- VO -->
+        <spicefactory:Object id="messageVO" type="{Message}"/>
+        <!-- Example -->
+        <spicefactory:Object id="messageExample" type="{Message}"/>
+    </fx:Declarations>
+</spicefactory:Objects>

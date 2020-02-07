@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:spicefactory="http://www.spicefactory.org/parsley"
+         currentState="@{pm.currentState}"
+         width="200" height="50">
+    <!---
+         Tela de Exibição da Message
+         @author Diego Ramalho de Oliveira
+         @since 10/09/2014
+         @version 1.0.0
+    -->
+    <fx:Script>
+		<![CDATA[
+        import br.com.projetusti.teste.config.HelloConfig;
+        import br.com.projetusti.teste.config.HelloConfig;
+        import br.com.projetusti.teste.model.presentation.HelloPM;
+
+        /**
+         * Presentation Model.
+         */
+        [Bindable]
+        [Inject(id="messagePM")]
+        public var pm:HelloPM;
+
+        public var title:String = "Tela de Exemplo";
+        ]]>
+	</fx:Script>
+    <!-- Elementos não visuais -->
+    <fx:Declarations>
+        <!-- Parsley -->
+        <spicefactory:ContextBuilder config="{HelloConfig}"/>
+        <spicefactory:Configure/>
+    </fx:Declarations>
+    <!-- Interface -->
+
+    <s:states>
+        <s:State name="search"/>
+        <s:State name="view"/>
+    </s:states>
+
+    <!-- Transições -->
+    <s:transitions>
+        <s:Transition fromState="search" toState="view">
+            <s:Sequence duration="500">
+                <s:Resize target="{this}"/>
+                <s:AddAction target="{vGroup1}"/>
+                <s:Fade target="{vGroup1}"/>
+            </s:Sequence>
+        </s:Transition>
+    </s:transitions>
+    <!-- Lay-out -->
+    <s:layout>
+        <s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
+    </s:layout>
+
+    <!-- Botão de Pesquisar -->
+    <s:Button id="btnAction"
+              includeIn="search"
+              focusEnabled="false"
+              label="Click"
+              toolTip="Busque uma mensagem"
+              click="pm.createMessage(event)"/>
+
+    <s:VGroup id="vGroup1"  includeIn="view">
+        <s:HGroup width="100%" verticalAlign="middle">
+            <!-- ID da Mensagem -->
+            <s:Label text="ID: " width="44" fontWeight="bold"/>
+            <s:Label text="{pm.valueObject.id}" width="100%"/>
+        </s:HGroup>
+        <s:HGroup width="100%" verticalAlign="middle">
+            <!-- Texto da Mensagem -->
+            <s:Label text="Texto: " width="44" fontWeight="bold"/>
+            <s:Label text="{pm.valueObject.text}" width="100%"/>
+        </s:HGroup>
+    </s:VGroup>
+
+</s:Group>

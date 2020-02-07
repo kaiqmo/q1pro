@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application pageTitle="teste"
+               xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:spicefactory="http://www.spicefactory.org/parsley"
+               backgroundColor="#CCCCCC"
+               >
+
+    <!--- Main do Exame de Teste.
+        @author Diego Ramalho de Oliveira
+        @since 10/09/2014
+        @version [VERSION] -->
+    <fx:Script>
+		<![CDATA[
+        import br.com.projetusti.teste.config.ApplicationConfig;
+        import br.com.projetusti.teste.model.presentation.ApplicationPM;
+        import org.spicefactory.parsley.core.messaging.ErrorPolicy;
+
+        /**
+         * Presentation Model.
+         */
+        [Inject]
+        [Bindable]
+        public var pm:ApplicationPM;
+        ]]>
+	</fx:Script>
+
+    <fx:Style>
+        @namespace s "library://ns.adobe.com/flex/spark";
+        @namespace mx "library://ns.adobe.com/flex/mx";
+
+        global {
+            text-align: left;
+            focus-color: #999999;
+        }
+
+    </fx:Style>
+
+    <!-- Elementos não visuais -->
+    <fx:Declarations>
+        <!-- Parsley -->
+        <spicefactory:ContextBuilder description="Contexto Principal">
+            <spicefactory:MessageSettings unhandledErrors="{ErrorPolicy.RETHROW}"/>
+            <spicefactory:FlexConfig type="{ApplicationConfig}"/>
+        </spicefactory:ContextBuilder>
+        <spicefactory:Configure/>
+    </fx:Declarations>
+
+    <!-- Interface -->
+    <!-- Barra com Menu -->
+    <mx:ApplicationControlBar id="controlBar" width="100%">
+
+        <!-- Menu -->
+        <mx:MenuBar id="mainMenu"
+                       labelField="@label"
+                       width="100%"
+                       dataProvider="{pm.menuController.menu.mainMenu}"
+                       itemClick="pm.mainMenu_itemClickHandler(event)"
+                       showRoot="false"
+                       focusEnabled="false"
+                       menuShow="pm.mainMenu_menuShowHandler(event)"/>
+    </mx:ApplicationControlBar>
+
+</s:Application>
